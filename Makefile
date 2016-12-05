@@ -3,10 +3,10 @@
 #
 
 .PHONY: version all run dist clean
-	
+
 APP_NAME := heketi
 CLIENT_PKG_NAME := heketi-client
-SHA := $(shell git rev-parse --short HEAD)
+HA := $(shell git rev-parse --short HEAD)
 BRANCH := $(subst /,-,$(shell git rev-parse --abbrev-ref HEAD))
 VER := $(shell git describe)
 ARCH := $(shell go env GOARCH)
@@ -24,7 +24,7 @@ endif
 endif
 
 # Go setup
-GO=go
+GO=/home/root/go/bin/go
 
 # Sources and Targets
 EXECUTABLES :=$(APP_NAME)
@@ -60,7 +60,7 @@ client:
 run: server
 	./$(APP_NAME)
 
-test: 
+test:
 	godep go test $(GOFILES)
 
 clean:
@@ -98,4 +98,4 @@ $(CLIENT_PACKAGE): all
 
 dist: $(PACKAGE) $(CLIENT_PACKAGE)
 
-.PHONY: server client test clean name run version 
+.PHONY: server client test clean name run version
